@@ -1,0 +1,2 @@
+--CRIANDO APLICACAO
+laravel new api
