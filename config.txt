@@ -1,2 +1,26 @@
+--COMANDOS INICIAIS
+php -version
+result: PHP 8.0.9 (cli) (built: Jul 29 2021 14:12:27) ( NTS Visual C++ 2019 x64 )
+composer global require laravel/installer
+
 --CRIANDO APLICACAO
+cd c:\dev\projetoLuna\
+git clone https://github.com/devtiagoabreu/projetoLuna.git .
 laravel new api
+
+--INICIAND SERVIDOR PHP PARA TESTE
+php artisan serve
+
+--GERANDO A PLICATION KEY
+php artisan key:generate
+
+--AUTENTICACAO JWT
+composer require tymon/jwt-auth
+se ocorrer erro tente
+composer require tymon/jwt-auth --ignore-platform-reqs
+
+--PUBLICANDO CONFIGURACAO
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+
+--CHAVE SECRETA JWT
+php artisan jwt:secret
