@@ -31,3 +31,6 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 --CHAVE SECRETA JWT
 php artisan jwt:secret
 
+--CRIANDO MIGRATIONS
+php artisan make:migration create_all_tables
+php artisan migrate:fresh
