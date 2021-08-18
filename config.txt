@@ -31,7 +31,3 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 --CHAVE SECRETA JWT
 php artisan jwt:secret
 
---GERAR SSH PARA GIT  github
-ssh-keygen -t rsa -C devtiagoabreu@gmail.com
---TESTANDO CHAVE SSH
-ssh -T git@github.com
