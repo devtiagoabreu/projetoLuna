@@ -1,4 +1,10 @@
+
 --COMANDOS INICIAIS
+--GERAR SSH PARA GIT  github
+ssh-keygen -t rsa -C devtiagoabreu@gmail.com
+--TESTANDO CHAVE SSH
+ssh -T git@github.com
+
 php -version
 result: PHP 8.0.9 (cli) (built: Jul 29 2021 14:12:27) ( NTS Visual C++ 2019 x64 )
 composer global require laravel/installer
@@ -24,3 +30,8 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 
 --CHAVE SECRETA JWT
 php artisan jwt:secret
+
+--GERAR SSH PARA GIT  github
+ssh-keygen -t rsa -C devtiagoabreu@gmail.com
+--TESTANDO CHAVE SSH
+ssh -T git@github.com
