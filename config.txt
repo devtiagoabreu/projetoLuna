@@ -51,3 +51,5 @@ php artisan make:Model ProfessionalAvailability
 
 --CRIANDO AS ROTAS
 
+--CRIANDO USUARIOS
+
