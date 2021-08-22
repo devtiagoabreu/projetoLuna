@@ -56,3 +56,7 @@ php artisan make:Model ProfessionalAvailability
 --FAZENDO LOGIN
 
 --FAZENDO LOGOUT E REFRESH
+
+--NÃO AUTORIZADO
+
+
