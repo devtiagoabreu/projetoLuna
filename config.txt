@@ -54,3 +54,5 @@ php artisan make:Model ProfessionalAvailability
 --CRIANDO USUARIOS
 
 --FAZENDO LOGIN
+
+--FAZENDO LOGOUT E REFRESH
