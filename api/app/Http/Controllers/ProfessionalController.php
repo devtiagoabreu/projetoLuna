@@ -15,7 +15,7 @@ use App\Models\professionalAvailability;
 
 class ProfessionalController extends Controller
 {
-    private $loggeddUser;
+    private $loggedUser;
     
     public function __construct() {
         $this->middleware('auth:api');
