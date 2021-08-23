@@ -61,3 +61,7 @@ php artisan make:Model ProfessionalAvailability
 
 --POPULANDO COM PROFICIONAIS ALEATÓRIOS
 
+--PEGANDO INFORMAÇÕES DO USUÁRIO
+
+
+
