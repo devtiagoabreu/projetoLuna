@@ -59,4 +59,5 @@ php artisan make:Model ProfessionalAvailability
 
 --NÃO AUTORIZADO
 
+--POPULANDO COM PROFICIONAIS ALEATÓRIOS
 

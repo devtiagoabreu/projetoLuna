@@ -19,6 +19,7 @@ class CreateAllTables extends Migration
             $table->string('avatar')->default('default.png');
             $table->string('email');
             $table->string('password');
+            $table->integer('user_status')->default(1);
         });
         Schema::create('user_favorites', function (Blueprint $table) {
             $table->id();
@@ -35,12 +36,14 @@ class CreateAllTables extends Migration
         Schema::create('professionals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('expertise');
             $table->string('avatar')->default('default.png');
             $table->float('stars')->default(0);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->string('email');
-            $table->string('password');
+            //$table->string('email');
+            //$table->string('password');
+            $table->integer('professional_status')->default(1);
         });
         Schema::create('professional_photos', function (Blueprint $table) {
             $table->id();
@@ -57,6 +60,7 @@ class CreateAllTables extends Migration
             $table->integer('id_professional');
             $table->string('name');
             $table->float('price');
+            $table->integer('service_status')->default(1);
         });
         Schema::create('professional_testimonials', function (Blueprint $table) {
             $table->id();
