@@ -65,4 +65,8 @@ php artisan make:Model ProfessionalAvailability
 
 --LISTANDO PROFISSIONAIS
 
+--PEGANDO A KEY DO GOOGLE MAPS GEOCODING
+https://console.cloud.google.com/apis/credentials
+
+
 
