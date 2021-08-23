@@ -21,7 +21,7 @@ class ProfessionalController extends Controller
         $this->middleware('auth:api');
         $this->loggeddUser = auth()->user();
     }
-
+    /*
     public function createRandom() {
         $array = ['error' => ''];
 
@@ -92,6 +92,22 @@ class ProfessionalController extends Controller
                 $newProfessionalAvail->save();
             }
         }
+
+        return $array;
+    }
+    */
+
+    public function list(Request $request) {
+        $array = ['error' => ''];
+
+        $professionals = Professional::all();
+
+        foreach($professionals as $pkey => $pvalue) {
+            $professionals[$pkey]['avatar'] = url('media/avatars/'. $professionals[$pkey]['avatar']);
+        }
+
+        $array['data'] = $professionals;
+        $array['loc'] = 'São Paulo';
 
         return $array;
     }
