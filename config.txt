@@ -68,5 +68,7 @@ php artisan make:Model ProfessionalAvailability
 --PEGANDO A KEY DO GOOGLE MAPS GEOCODING
 https://console.cloud.google.com/apis/credentials
 
+--FILTRANDO POR LOCALIZAÇÃO | DISTANCIA
+
 
 
