@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\user;
-use App\Models\professional;
-use App\Models\professionalPhotos;
-use App\Models\professionalReviews;
-use App\Models\professionalServices;
-use App\Models\professionalTestimonial;
-use App\Models\professionalAvailability;
+use App\Models\User;
+use App\Models\UserAppointments;
+use App\Models\UserFavorite;
+use App\Models\Professional;
+use App\Models\ProfessionalPhotos;
+use App\Models\ProfessionalReviews;
+use App\Models\ProfessionalServices;
+use App\Models\ProfessionalTestimonial;
+use App\Models\ProfessionalAvailability;
 
 class ProfessionalController extends Controller
 {
@@ -19,7 +21,7 @@ class ProfessionalController extends Controller
     
     public function __construct() {
         $this->middleware('auth:api');
-        $this->loggeddUser = auth()->user();
+        $this->loggedUser = auth()->user();
     }
     /*
     public function createRandom() {
@@ -175,6 +177,14 @@ class ProfessionalController extends Controller
             $professional['testimonials'] = [];
             $professional['available'] = [];
 
+            //retorna favoritos
+            $cFavorite = UserFavorite::where('id_user', $this->loggedUser->id)
+                ->where('id_professional', $professional->id)
+                ->count();
+            if($cFavorite > 0) {
+                $professional['favorited'] = true;
+            } 
+
             //retornando as fotos
             $professional['photos'] = ProfessionalPhotos::select(['id', 'url'])
                 ->where('id_professional', $professional->id)
@@ -194,7 +204,57 @@ class ProfessionalController extends Controller
                 ->get();
 
             //retornando disponibilidade
-            
+            $availability = [];
+
+            // - retornando disponibilidade geral
+            $avails = ProfessionalAvailability::select(['*'])
+            ->where('id_professional', $professional->id)
+            ->get();
+            $availWeekdays = [];
+            foreach($avails as $item) {
+                $availWeekdays[$item['weekday']] = explode(',', $item['hours']);
+            }
+
+            // - retornar agendamentos dos próximos 20 dias 
+            $appointments = [];
+            $appQuery = UserAppointments::where('id_professional', $professional->id)
+                ->whereBetween('ap_datetime', [
+                    date('Y-m-d').' 00:00:00',
+                    date('Y-m-d', strtotime('+20 days')).' 23:59:59'
+                ])
+                ->get();
+            foreach($appQuery as $appItem) {
+                $appointments[] = $appItem['ap_datetime'];
+            }
+
+            // - Gerar disponibilidade real
+            for($q=0;$q<20;$q++) {
+                $timeItem = strtotime('+'.$q.' days');
+                $weekday = date('w', $timeItem);
+
+                if(in_array($weekday, array_keys($availWeekdays))) {
+                    $hours = [];
+
+                    $dayItem = date('Y-m-d', $timeItem);
+
+                    foreach($availWeekdays[$weekday] as $hourItem) {
+                        $dayFormated = $dayItem.' '.$hourItem.':00';
+                        if(!in_array($dayFormated, $appointments)) {
+                            $hours[] = $hourItem;
+                        } 
+                    }
+
+                    if(count($hours) > 0) {
+                        $availability[] = [
+                            'date' => $dayItem,
+                            'hours' => $hours
+                        ];
+                    }
+
+                }
+            }
+
+            $professional['available'] = $availability;
             
 
             $array['data'] = $professional;
