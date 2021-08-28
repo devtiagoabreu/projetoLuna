@@ -161,4 +161,49 @@ class ProfessionalController extends Controller
 
         return $array;
     }
+
+    public function one($id) {
+        $array = ['error' => ''];
+
+        $professional = Professional::find($id);
+
+        if($professional) {
+            $professional['avatar'] = url('media/avatars/'.$professional['avatar']);
+            $professional['favorited'] = false;
+            $professional['photos'] = [];
+            $professional['services'] = [];
+            $professional['testimonials'] = [];
+            $professional['available'] = [];
+
+            //retornando as fotos
+            $professional['photos'] = ProfessionalPhotos::select(['id', 'url'])
+                ->where('id_professional', $professional->id)
+                ->get();
+            foreach($professional['photos'] as $ppkey => $ppvalue) {
+                $professional['photos'][$ppkey]['url'] = url('media/uploads/'.$professional['photos'][$ppkey]['url']);
+            }
+
+            //retornando os serviços
+            $professional['services'] = ProfessionalServices::select(['id', 'name', 'price'])
+                ->where('id_professional', $professional->id)
+                ->get();
+
+            //retornando os depoimentos
+            $professional['testimonials'] = ProfessionalTestimonial::select(['id', 'name', 'rate', 'body'])
+                ->where('id_professional', $professional->id)
+                ->get();
+
+            //retornando disponibilidade
+            
+            
+
+            $array['data'] = $professional;
+        } else {
+            $array['error'] = 'Este Profissional não foi encontrado';
+            return $array;
+        }
+
+
+        return $array;
+    }
 }
