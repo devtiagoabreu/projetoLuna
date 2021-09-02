@@ -266,4 +266,75 @@ class ProfessionalController extends Controller
 
         return $array;
     }
+
+    public function setAppointment($id, Request $request) {
+        //service, year, month, day, hour
+        $array = ['error'=>''];
+
+        $service = $request->input('service');
+        $year = intval($request->input('year'));
+        $month = intval($request->input('month'));
+        $day = intval($request->input('day'));
+        $hour = intval($request->input('hour'));
+
+        $month = ($month < 10) ? '0'.$month : $month;
+        $day = ($day < 10) ? '0'.$day : $day;
+        $hour = ($hour < 10) ? '0'.$hour : $hour;
+
+        // 1. verificar se o serviço existe para o profissional;
+        $professionalservice = ProfessionalServices::select()
+            ->where('id', $service)
+            ->where('id_professional', $id)
+        ->first();
+        if($professionalservice) {
+            // 2. verificar se a data é real;
+            $apDate = $year.'-'.$month.'-'.$day.' '.$hour.':00:00';
+            if(strtotime($apDate) > 0) {
+                // 3. verificar se o profissional já possui agentamento nesse dia/hora;
+                $apps = UserAppointment::select()
+                    ->where('id_professional', $id)
+                    ->where('ap_datetime', $apDate)
+                ->coubt();
+                if($apps === 0) {
+                    // 4. verificar se  profissional atende nesta data;
+                    $weekday = date('w', strtotime($apDate));
+                    $avail = ProfessionalAvailability::select()
+                        ->where('id_professional', id)
+                        ->where('weekday', $weekday)
+                    ->first();
+                    if($avail) {
+                        // 4.1. verificar se  profissional atende nesta hora;   
+                        $hours = explode(',', $avail['hours']);
+                        if(in_array($hour.':00', $hours)){
+                            // 5. fazer agendamento;
+                            $newApp = new UserAppointment();
+                            $newApp->id_user = $this->loggedUser->id;
+                            $newApp->id_professional = $id;
+                            $newApp->id_service = $service;
+                            $newApp->ap_datetime = $apDate;
+                            $newApp->save();
+                        } else {
+                            $array['error'] = 'Profissional não atende nesta hora';
+                        } 
+                    } else {
+                        $array['error'] = 'Profissional não atende neste dia';
+                    }
+                } else {
+                    $array['error'] = 'Já possui agentamento neste dia/hora';
+                }
+            } else {
+                $array['error'] = 'Data inválida';
+            }
+
+
+
+            
+        } else {
+            $array['error'] = 'Serviço inexistente';
+        }
+
+        
+
+        return $array;
+    }
 }

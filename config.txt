@@ -79,3 +79,6 @@ https://console.cloud.google.com/apis/credentials
 --Alteração em Appointments (migration)
  --php artisan make:migration alter_appointment_table
  --php artisan migrate
+
+--Finalizando o agendamento
+    
