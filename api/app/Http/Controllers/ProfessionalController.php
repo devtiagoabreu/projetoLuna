@@ -291,15 +291,15 @@ class ProfessionalController extends Controller
             $apDate = $year.'-'.$month.'-'.$day.' '.$hour.':00:00';
             if(strtotime($apDate) > 0) {
                 // 3. verificar se o profissional já possui agentamento nesse dia/hora;
-                $apps = UserAppointment::select()
+                $apps = UserAppointments::select()
                     ->where('id_professional', $id)
                     ->where('ap_datetime', $apDate)
-                ->coubt();
+                ->count();
                 if($apps === 0) {
                     // 4. verificar se  profissional atende nesta data;
                     $weekday = date('w', strtotime($apDate));
                     $avail = ProfessionalAvailability::select()
-                        ->where('id_professional', id)
+                        ->where('id_professional', $id)
                         ->where('weekday', $weekday)
                     ->first();
                     if($avail) {
@@ -307,7 +307,7 @@ class ProfessionalController extends Controller
                         $hours = explode(',', $avail['hours']);
                         if(in_array($hour.':00', $hours)){
                             // 5. fazer agendamento;
-                            $newApp = new UserAppointment();
+                            $newApp = new UserAppointments();
                             $newApp->id_user = $this->loggedUser->id;
                             $newApp->id_professional = $id;
                             $newApp->id_service = $service;
@@ -325,15 +325,9 @@ class ProfessionalController extends Controller
             } else {
                 $array['error'] = 'Data inválida';
             }
-
-
-
-            
         } else {
             $array['error'] = 'Serviço inexistente';
         }
-
-        
 
         return $array;
     }
