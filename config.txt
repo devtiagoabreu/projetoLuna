@@ -89,3 +89,5 @@ https://console.cloud.google.com/apis/credentials
 --Buscando profissionais
 
 --Listando Agendamentos
+
+--Editando informações do usuário
