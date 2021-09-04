@@ -59,4 +59,26 @@ class UserController extends Controller
 
         return $array;
     }
+
+    public function getFavorites() {
+        $array = ['error' => '', 'list'=>[]];
+
+        $favs = UserFavorite::select()
+            ->where('id_user', $this->loggedUser->id)
+        ->get();
+
+        if($favs){
+            foreach($favs as $fav){
+
+                $professional = Professional::find($fav['id_professional']);
+                $professional['avatar'] = url('media/avatars/'.$professional['avatar']); 
+                $array['list'][] = $professional;
+
+            }
+        }
+
+
+        return $array;
+
+    }
 }

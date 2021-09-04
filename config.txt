@@ -82,4 +82,6 @@ https://console.cloud.google.com/apis/credentials
 
 --Finalizando o agendamento
 
---Favoritar um profissional    
+--Favoritar um profissional 
+
+--Listando favoritos
