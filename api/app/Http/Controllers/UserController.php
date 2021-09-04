@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\UserAppointments;
 use App\Models\UserFavorite;
 use App\Models\Professional;
+use App\Models\ProfessionalServices;
 
 class UserController extends Controller
 {
@@ -73,12 +75,43 @@ class UserController extends Controller
                 $professional = Professional::find($fav['id_professional']);
                 $professional['avatar'] = url('media/avatars/'.$professional['avatar']); 
                 $array['list'][] = $professional;
-
             }
         }
 
-
         return $array;
 
+    }
+
+    public function getAppointments() {
+        $array = ['error' => '', 'list'=>[]];
+
+        $apps = UserAppointments::select()
+            ->where('id_user', $this->loggedUser->id)
+            ->orderBy('ap_datetime', 'DESC')
+        ->get();
+
+        if($apps) {
+
+           foreach($apps as $app) {
+
+            $professional = Professional::find($app['id_professional']);
+            $professional['avatar'] = url('media/avatars/'. $professional['avatar']);
+
+            $service = ProfessionalServices::find($app['id_service']);
+
+            $array['list'][] = [
+                'id' => $app['id'],
+                'datetime' => $app['ap_datetime'],
+                'professional' => $professional,
+                'service' => $service
+            ];
+
+           }
+            
+        } else {
+            $array['error'] = 'Não existem agendamentos';
+        }
+
+        return $array;
     }
 }
