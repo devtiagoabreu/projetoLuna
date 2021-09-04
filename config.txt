@@ -59,7 +59,7 @@ php artisan make:Model ProfessionalAvailability
 
 --NÃO AUTORIZADO
 
---POPULANDO COM PROFICIONAIS ALEATÓRIOS
+--POPULANDO COM PROFISSIONAIS ALEATÓRIOS
 
 --PEGANDO INFORMAÇÕES DO USUÁRIO
 
@@ -85,3 +85,5 @@ https://console.cloud.google.com/apis/credentials
 --Favoritar um profissional 
 
 --Listando favoritos
+
+--Buscando profissionais

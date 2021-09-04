@@ -331,4 +331,29 @@ class ProfessionalController extends Controller
 
         return $array;
     }
+
+    public function search(Request $request) {
+        $array = ['error'=>'', 'list'=>[]];
+
+        $q = $request->input('q');
+
+        if($q) {
+
+            $professionals = Professional::select()
+                ->where('name', 'LIKE', '%'.$q.'%')
+            ->get();
+
+            foreach($professionals as $pkey => $professional) {
+                $professionals[$pkey]['avatar'] = url('media/avatars/'. $professionals[$pkey]['avatar']);
+            }
+
+            $array['list'] = $professionals;
+            
+        } else {
+           $array['error'] = 'Digite algo para buscar'; 
+        }
+
+        return $array;
+
+    }
 }
