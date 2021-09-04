@@ -81,4 +81,5 @@ https://console.cloud.google.com/apis/credentials
  --php artisan migrate
 
 --Finalizando o agendamento
-    
+
+--Favoritar um profissional    
