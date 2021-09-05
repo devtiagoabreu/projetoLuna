@@ -91,3 +91,9 @@ https://console.cloud.google.com/apis/credentials
 --Listando Agendamentos
 
 --Editando informações do usuário
+
+--Editando o avatar do usuário
+---composer require intervention/image --se apresentar erro rodar proximo comando
+---composer require intervention/image --ignore-platform-reqs
+---instalando biblioteca GD
+----em php.ini descomente ;extension=gd
