@@ -97,3 +97,5 @@ https://console.cloud.google.com/apis/credentials
 ---composer require intervention/image --ignore-platform-reqs
 ---instalando biblioteca GD
 ----em php.ini descomente ;extension=gd
+
+--Configurando mensagens de erro para pt-BR (validation)
