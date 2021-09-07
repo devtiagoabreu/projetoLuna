@@ -1,5 +1,6 @@
 
---COMANDOS INICIAIS
+*** BACK-END - API - LARAVEL
+--COMANDOS INICIAIS PARA CRIACAO DA 
 --GERAR SSH PARA GIT  github
 ssh-keygen -t rsa -C devtiagoabreu@gmail.com
 --TESTANDO CHAVE SSH
@@ -99,3 +100,43 @@ https://console.cloud.google.com/apis/credentials
 ----em php.ini descomente ;extension=gd
 
 --Configurando mensagens de erro para pt-BR (validation)
+
+***FRONT-END - REACT NATIVE
+
+--ABRA O POWERSHELL EM MODO ADMINISTRADOR
+--VERIFIQUE POLÍTICAS: Get-ExecutionPolicy
+--SE ESTIVEREM 'Restricted' RODE UM DOS COMANDO ABAIXO:
+--- Set-ExecutionPolicy AllSigned or Set-ExecutionPolicy Bypass -Scope Process
+--INSTALE O CHOCOLATEY: Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+--instale o nodejs   
+---choco install nodejs-lts
+
+--instale o Expo 
+---npm install -g expo-cli
+
+--criando projeto react-native 
+---npx react-native init app
+
+--instalando libs e biblitecas
+--biblioteca para estilizar o app
+--- npm install styled-components
+--Gerenciamento de páginas
+---npm install @react-navigation/native
+
+--acessando site https://reactnavigation.org/
+---documentação
+--instaland outras dependencias
+---npm install react-native-screens react-native-safe-area-context
+---npm install @react-navigation/stack
+---npm install @react-navigation/bottom-tabs
+---npm install @react-native-community/async-storage
+---npm install @react-native-community/geolocation
+---npm install react-native-permissions
+configuração no AndroidManifest.xml
+--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+---npm install react-native-swiper
+---npm install react-native-svg
+---npm install react-native-svg-transformer
+configuração no metro.config.js
