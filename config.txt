@@ -103,6 +103,9 @@ https://console.cloud.google.com/apis/credentials
 
 ***FRONT-END - REACT NATIVE
 
+--instalando Yarn
+npm install -g yarn
+
 --ABRA O POWERSHELL EM MODO ADMINISTRADOR
 --VERIFIQUE POLÍTICAS: Get-ExecutionPolicy
 --SE ESTIVEREM 'Restricted' RODE UM DOS COMANDO ABAIXO:
@@ -116,8 +119,8 @@ https://console.cloud.google.com/apis/credentials
 ---npm install -g expo-cli
 
 --criando projeto react-native 
----npx react-native init app
-
+-----rondando com expo - precisamos criar um projeto com a funçao expo + as nativas 
+--yarn create react-native-app appone
 --instalando libs e biblitecas
 --biblioteca para estilizar o app
 --- npm install styled-components
@@ -140,3 +143,6 @@ configuração no AndroidManifest.xml
 ---npm install react-native-svg
 ---npm install react-native-svg-transformer
 configuração no metro.config.js
+
+--rondado projeto pela 1ª vez
+--yarn web 
