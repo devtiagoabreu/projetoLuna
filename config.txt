@@ -146,3 +146,10 @@ configuração no metro.config.js
 
 --rondado projeto pela 1ª vez
 --yarn web 
+
+
+--Preload
+
+yarn add babel-plugin-inline-react-svg
+
+cmd.exe /C"%ANDROID_HOME%\tools\bin\sdkmanager.bat --licenses"
